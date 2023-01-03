@@ -2,17 +2,15 @@ import { LitElement, html } from "lit";
 import { customElement } from "lit/decorators.js";
 
 import { StoreController } from "./nanostores/lit/StoreController";
+import { isCartOpen } from "./stores/cartStore";
 
-import { atom } from "nanostores";
-export const isCartOpen = atom(false);
-
-@customElement("simple-demo")
+@customElement("single-demo")
 export class SimpleDemo extends LitElement {
   private $isCartOpen = new StoreController(this, isCartOpen);
 
   render() {
     return html`
-      <h2>Simple Demo</h2>
+      <h3>Single</h3>
       <input
         type="checkbox"
         .checked=${this.$isCartOpen.value}
@@ -26,6 +24,6 @@ export class SimpleDemo extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "simple-demo": SimpleDemo;
+    "single-demo": SimpleDemo;
   }
 }

@@ -1,33 +1,27 @@
 import { LitElement, html } from "lit";
 import { customElement } from "lit/decorators.js";
 
-import { StoreController } from "./nanostores/lit/StoreController";
-
 import { booleanAtom } from "./stores/booleanStore";
 import { stringAtom } from "./stores/stringStore";
 import { numberAtom } from "./stores/numberStore";
 import { listAtom } from "./stores/listStore";
 import { objectAtom } from "./stores/objectStore";
+import { useStores } from "./nanostores/lit/useStores";
 
-@customElement("advanced-demo")
+@customElement("multi-demo-usestores")
+@useStores([booleanAtom, stringAtom, numberAtom, listAtom, objectAtom])
 export class AdvancedDemo extends LitElement {
-  private $booleanAtom = new StoreController(this, booleanAtom);
-  private $stringAtom = new StoreController(this, stringAtom);
-  private $numberAtom = new StoreController(this, numberAtom);
-  private $listAtom = new StoreController(this, listAtom);
-  private $objectAtom = new StoreController(this, objectAtom);
-
   render() {
-    return html`<h2>Advanced Demo</h2>
+    return html`<h3>Multi</h3>
       <form>
         <div>
           <label for="boolean">Boolean</label>
           <input
             id="boolean"
             type="checkbox"
-            .checked=${this.$booleanAtom.value}
+            .checked=${booleanAtom.get()}
             @change=${() => {
-              booleanAtom.set(!this.$booleanAtom.value);
+              booleanAtom.set(!booleanAtom.get());
             }}
           />
         </div>
@@ -36,7 +30,7 @@ export class AdvancedDemo extends LitElement {
           <input
             id="string"
             type="text"
-            .value=${this.$stringAtom.value}
+            .value=${stringAtom.get()}
             @keyup=${(e: any) => {
               stringAtom.set(e.target.value);
             }}
@@ -48,7 +42,7 @@ export class AdvancedDemo extends LitElement {
           <input
             id="number"
             type="number"
-            .value=${this.$numberAtom.value}
+            .value=${numberAtom.get()}
             @keyup=${(e: any) => {
               numberAtom.set(e.target.value);
             }}
@@ -66,7 +60,7 @@ export class AdvancedDemo extends LitElement {
           >
             +
           </button>
-          <output id="list">${this.$listAtom.value.length}</output>
+          <output id="list">${listAtom.get().length}</output>
         </div>
 
         <hr />
@@ -75,7 +69,7 @@ export class AdvancedDemo extends LitElement {
           <input
             id="object.string"
             type="text"
-            .value=${this.$objectAtom.value.name}
+            .value=${objectAtom.get().name}
             @keyup=${(e: any) => {
               objectAtom.set({ ...objectAtom.get(), name: e.target.value });
             }}
@@ -86,9 +80,7 @@ export class AdvancedDemo extends LitElement {
           <input
             id="object.date"
             type="date"
-            .value=${this.$objectAtom.value.birthday
-              .toISOString()
-              .substr(0, 10)}
+            .value=${objectAtom.get().birthday.toISOString().substr(0, 10)}
             @change=${(e: any) => {
               objectAtom.set({
                 ...objectAtom.get(),
@@ -101,7 +93,7 @@ export class AdvancedDemo extends LitElement {
           <label for="object.option">Object.option</label>
           <select
             id="object.option"
-            .value=${this.$objectAtom.value.favouriteIceCream}
+            .value=${objectAtom.get().favouriteIceCream}
             @change=${(e: any) => {
               objectAtom.set({
                 ...objectAtom.get(),
@@ -120,6 +112,6 @@ export class AdvancedDemo extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "advanced-demo": AdvancedDemo;
+    "multi-demo-usestores": AdvancedDemo;
   }
 }
