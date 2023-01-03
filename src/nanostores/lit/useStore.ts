@@ -1,7 +1,7 @@
 import { ReactiveController, ReactiveControllerHost } from "lit";
 import { WritableAtom } from "nanostores";
 
-export class useStore<AtomType> implements ReactiveController {
+export class StoreController<AtomType> implements ReactiveController {
   private _atom: WritableAtom<AtomType>;
   private _unsubscribe: () => void;
   public value: AtomType;

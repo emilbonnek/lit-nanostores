@@ -1,7 +1,7 @@
 import { LitElement, html } from "lit";
 import { customElement } from "lit/decorators.js";
 
-import { useStore } from "./nanostores/lit/useStore";
+import { StoreController } from "./nanostores/lit/useStore";
 
 import { booleanAtom } from "./stores/booleanStore";
 import { stringAtom } from "./stores/stringStore";
@@ -11,11 +11,11 @@ import { objectAtom } from "./stores/objectStore";
 
 @customElement("advanced-demo")
 export class AdvancedDemo extends LitElement {
-  private $booleanAtom = new useStore(this, booleanAtom);
-  private $stringAtom = new useStore(this, stringAtom);
-  private $numberAtom = new useStore(this, numberAtom);
-  private $listAtom = new useStore(this, listAtom);
-  private $objectAtom = new useStore(this, objectAtom);
+  private $booleanAtom = new StoreController(this, booleanAtom);
+  private $stringAtom = new StoreController(this, stringAtom);
+  private $numberAtom = new StoreController(this, numberAtom);
+  private $listAtom = new StoreController(this, listAtom);
+  private $objectAtom = new StoreController(this, objectAtom);
 
   render() {
     return html`<h2>Advanced Demo</h2>

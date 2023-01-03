@@ -1,14 +1,14 @@
 import { LitElement, html } from "lit";
 import { customElement } from "lit/decorators.js";
 
-import { useStore } from "./nanostores/lit/useStore";
+import { StoreController } from "./nanostores/lit/useStore";
 
 import { atom } from "nanostores";
 export const isCartOpen = atom(false);
 
 @customElement("simple-demo")
 export class SimpleDemo extends LitElement {
-  private $isCartOpen = new useStore(this, isCartOpen);
+  private $isCartOpen = new StoreController(this, isCartOpen);
 
   render() {
     return html`
