@@ -1,7 +1,7 @@
 import { LitElement, html } from "lit";
 import { customElement } from "lit/decorators.js";
 
-import { StoreController } from "./nanostores/lit/useStore";
+import { StoreController } from "./nanostores/lit/StoreController";
 
 import { atom } from "nanostores";
 export const isCartOpen = atom(false);
