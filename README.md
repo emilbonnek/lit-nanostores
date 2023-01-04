@@ -6,3 +6,4 @@
 
  Demo of setting up nanostores with Lit using reactive controller
 
+[nanostores issue "Support for Lit"](https://github.com/nanostores/nanostores/issues/95)
