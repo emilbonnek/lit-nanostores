@@ -1,12 +1,15 @@
+import { ReactiveControllerHost } from "lit";
 import { WritableAtom } from "nanostores";
-import { StoreController } from "./StoreController";
+import type { Constructable } from "./Contructable";
+import { StoresController } from "./StoresController";
 
-export function useStores(atoms: WritableAtom[]) {
-  return (constructor: Function) => {
-    const originalConnectedCallback = constructor.prototype.connectedCallback;
-    constructor.prototype.connectedCallback = function () {
-      atoms.map((atom) => new StoreController(this, atom));
-      originalConnectedCallback.call(this);
+export function useStores(...atoms: WritableAtom<any>[]) {
+  return <T extends Constructable<ReactiveControllerHost>>(constructor: T) => {
+    return class extends constructor {
+      constructor(...args: any[]) {
+        super(...args);
+        new StoresController(this, atoms);
+      }
     };
   };
 }

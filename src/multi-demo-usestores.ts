@@ -9,7 +9,7 @@ import { objectAtom } from "./stores/objectStore";
 import { useStores } from "./nanostores/lit/useStores";
 
 @customElement("multi-demo-usestores")
-@useStores([booleanAtom, stringAtom, numberAtom, listAtom, objectAtom])
+@useStores(booleanAtom, stringAtom, numberAtom, listAtom, objectAtom)
 export class AdvancedDemo extends LitElement {
   render() {
     return html`<h3>Multi</h3>

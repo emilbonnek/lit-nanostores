@@ -5,7 +5,7 @@ import { useStores } from "./nanostores/lit/useStores";
 import { isCartOpen } from "./stores/cartStore";
 
 @customElement("single-demo-usestores")
-@useStores([isCartOpen])
+@useStores(isCartOpen)
 export class SingleDemo extends LitElement {
   render() {
     return html`
