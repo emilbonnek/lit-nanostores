@@ -2,22 +2,22 @@ import { ReactiveController, ReactiveControllerHost } from "lit";
 import { WritableAtom } from "nanostores";
 
 export class StoresController implements ReactiveController {
-  private unsubscribes: undefined | (() => void)[];
+  private _unsubscribes: undefined | (() => void)[];
 
   constructor(
-    private host: ReactiveControllerHost,
-    private atoms: WritableAtom[]
+    private _host: ReactiveControllerHost,
+    private _atoms: WritableAtom[]
   ) {
-    host.addController(this);
+    _host.addController(this);
   }
 
   hostConnected() {
-    this.unsubscribes = this.atoms.map((atom) =>
-      atom.subscribe(() => this.host.requestUpdate())
+    this._unsubscribes = this._atoms.map((atom) =>
+      atom.subscribe(() => this._host.requestUpdate())
     );
   }
 
   hostDisconnected() {
-    this.unsubscribes?.forEach((unsubscribe) => unsubscribe());
+    this._unsubscribes?.forEach((unsubscribe) => unsubscribe());
   }
 }
