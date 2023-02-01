@@ -8,9 +8,9 @@ import { listAtom } from "./stores/listStore";
 import { objectAtom } from "./stores/objectStore";
 import { useStores } from "./nanostores/lit/useStores";
 
-@customElement("multi-demo-usestores")
+@customElement("multi-demo-decorator")
 @useStores(booleanAtom, stringAtom, numberAtom, listAtom, objectAtom)
-export class AdvancedDemo extends LitElement {
+export class MultiDemoDecorator extends LitElement {
   render() {
     return html`<h3>Multi</h3>
       <form>
@@ -112,6 +112,6 @@ export class AdvancedDemo extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "multi-demo-usestores": AdvancedDemo;
+    "multi-demo-decorator": MultiDemoDecorator;
   }
 }

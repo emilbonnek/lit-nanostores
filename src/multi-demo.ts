@@ -10,7 +10,7 @@ import { listAtom } from "./stores/listStore";
 import { objectAtom } from "./stores/objectStore";
 
 @customElement("multi-demo")
-export class AdvancedDemo extends LitElement {
+export class MultiDemo extends LitElement {
   private $booleanAtom = new StoreController(this, booleanAtom);
   private $stringAtom = new StoreController(this, stringAtom);
   private $numberAtom = new StoreController(this, numberAtom);
@@ -120,6 +120,6 @@ export class AdvancedDemo extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "multi-demo": AdvancedDemo;
+    "multi-demo": MultiDemo;
   }
 }

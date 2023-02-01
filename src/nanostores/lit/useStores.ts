@@ -1,14 +1,41 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactiveControllerHost } from "lit";
-import { WritableAtom } from "nanostores";
-import type { Constructable } from "./Contructable";
-import { StoresController } from "./StoresController";
+import { Store } from "nanostores";
+import { MultiStoreController } from "./MultiStoreController";
 
-export function useStores(...atoms: WritableAtom<any>[]) {
-  return <T extends Constructable<ReactiveControllerHost>>(constructor: T) => {
+/**
+ * A TypeScript decorator that creates a new `MultiStoreController` for the atoms
+ * @decorator `withStores(atoms)`
+ * @param atoms The atoms to subscribe to.
+ *
+ * @example
+ * ```ts
+ * import { LitElement, html } from 'lit';
+ * import { customElement } from 'lit/decorators.js';
+ * import { atom } from 'nanostores';
+ * import { useStores } from '@nanostores/lit';
+ *
+ * const count = atom(0);
+ *
+ * @customElement('my-element')
+ * @useStores(count)
+ * class MyElement extends LitElement {
+ *  render() {
+ *   return html\`Count: \${count.get()}\`;
+ *   }
+ * }
+ * ```
+ */
+export function useStores<TAtoms extends Array<Store<unknown>>>(
+  ...atoms: TAtoms
+) {
+  return <TConstructor extends new (...args: any[]) => ReactiveControllerHost>(
+    constructor: TConstructor
+  ) => {
     return class extends constructor {
       constructor(...args: any[]) {
         super(...args);
-        new StoresController(this, atoms);
+        new MultiStoreController(this, atoms);
       }
     };
   };

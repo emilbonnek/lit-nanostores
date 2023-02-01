@@ -17,6 +17,7 @@
     "build": "tsc && vite build"
   },
   "dependencies": {
+    "@nanostores/router": "^0.8.0",
     "lit": "^2.4.1",
     "nanostores": "^0.7.1"
   },

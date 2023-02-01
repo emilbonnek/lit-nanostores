@@ -1,12 +1,11 @@
 import { LitElement, html } from "lit";
 import { customElement } from "lit/decorators.js";
+import { withStores } from "./nanostores/lit";
 
-import { useStores } from "./nanostores/lit/useStores";
 import { isCartOpen } from "./stores/cartStore";
 
-@customElement("single-demo-usestores")
-@useStores(isCartOpen)
-export class SingleDemo extends LitElement {
+@customElement("single-demo-mixin")
+export class SingleDemoMixin extends withStores(LitElement, [isCartOpen]) {
   render() {
     return html`
       <h3>Single</h3>
@@ -23,6 +22,6 @@ export class SingleDemo extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "single-demo-usestores": SingleDemo;
+    "single-demo-mixin": SingleDemoMixin;
   }
 }

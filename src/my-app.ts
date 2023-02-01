@@ -3,10 +3,10 @@ import { customElement } from "lit/decorators.js";
 
 import "./single-demo";
 import "./multi-demo";
-import "./single-demo-usestore";
-import "./multi-demo-usestore";
-import "./single-demo-usestores";
-import "./multi-demo-usestores";
+import "./single-demo-mixin";
+import "./multi-demo-mixin";
+import "./single-demo-decorator";
+import "./multi-demo-decorator";
 
 @customElement("my-app")
 export class MyApp extends LitElement {
@@ -25,29 +25,29 @@ export class MyApp extends LitElement {
         </div>
       </div>
 
-      <h2>Using @useStore decorator</h2>
-      <div style="display: flex; column-gap: 3em; justify-content: center">
-        <div>
-          <single-demo-usestore></single-demo-usestore>
-          <multi-demo-usestore></multi-demo-usestore>
-        </div>
-        <div>
-          <single-demo-usestore></single-demo-usestore>
-          <multi-demo-usestore></multi-demo-usestore>
-        </div>
-      </div>
-
       <h2>Using @useStores decorator</h2>
       <div style="display: flex; column-gap: 3em; justify-content: center">
         <div>
-          <single-demo-usestores></single-demo-usestores>
-          <multi-demo-usestores></multi-demo-usestores>
+          <single-demo-decorator></single-demo-decorator>
+          <multi-demo-decorator></multi-demo-decorator>
         </div>
         <div>
-          <single-demo-usestores></single-demo-usestores>
-          <multi-demo-usestores></multi-demo-usestores>
+          <single-demo-decorator></single-demo-decorator>
+          <multi-demo-decorator></multi-demo-decorator>
         </div>
-      </div> `;
+      </div>
+
+      <h2>Using @withStores mixin</h2>
+      <div style="display: flex; column-gap: 3em; justify-content: center">
+        <div>
+          <single-demo-mixin></single-demo-mixin>
+          <multi-demo-mixin></multi-demo-mixin>
+        </div>
+        <div>
+          <single-demo-mixin></single-demo-mixin>
+          <multi-demo-mixin></multi-demo-mixin>
+        </div>
+      </div>`;
   }
 }
 

@@ -6,15 +6,16 @@ import { stringAtom } from "./stores/stringStore";
 import { numberAtom } from "./stores/numberStore";
 import { listAtom } from "./stores/listStore";
 import { objectAtom } from "./stores/objectStore";
-import { useStore } from "./nanostores/lit/useStore";
+import { withStores } from "./nanostores/lit";
 
-@customElement("multi-demo-usestore")
-@useStore(booleanAtom)
-@useStore(stringAtom)
-@useStore(numberAtom)
-@useStore(listAtom)
-@useStore(objectAtom)
-export class AdvancedDemo extends LitElement {
+@customElement("multi-demo-mixin")
+export class MultiDemoMixin extends withStores(LitElement, [
+  booleanAtom,
+  stringAtom,
+  numberAtom,
+  listAtom,
+  objectAtom,
+]) {
   render() {
     return html`<h3>Multi</h3>
       <form>
@@ -116,6 +117,6 @@ export class AdvancedDemo extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "multi-demo-usestore": AdvancedDemo;
+    "multi-demo-mixin": MultiDemoMixin;
   }
 }
